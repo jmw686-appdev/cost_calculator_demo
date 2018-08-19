@@ -17,13 +17,17 @@ class RecipesController < ApplicationController
 
   def create_row
     @recipe = Recipe.new
+    @ingredient = Ingredient.new
 
+    @ingredient.name = params.fetch('i-name')
+    @ingredient.amount = params.fetch('amount')
+    @ingredient.units = params.fetch('units')
     @recipe.name = params.fetch("name")
     @recipe.user_id = params.fetch("user_id")
-
     if @recipe.valid?
       @recipe.save
-
+      @ingredient.recipe_id = @recipe.id
+      @ingredient.save
       redirect_to("/recipes", :notice => "Recipe created successfully.")
     else
       render("recipe_templates/new_form.html.erb")

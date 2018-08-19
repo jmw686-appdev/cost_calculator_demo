@@ -54,7 +54,7 @@
     <%= time_ago_in_words(@recipe.updated_at) %> ago
   </dd>
 </dl>
-
+<%= render 'shared/quick_add_ingredient' %>
 <a href="/delete_recipe/<%= @recipe.id %>">
   Delete recipe
 </a>

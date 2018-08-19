@@ -21,7 +21,7 @@ class IngredientsController < ApplicationController
     @ingredient.name = params.fetch("name")
     @ingredient.amount = params.fetch("amount")
     @ingredient.units = params.fetch("units")
-    @ingredient.price = params.fetch("price")
+    # @ingredient.price = params.fetch("price")
     @ingredient.recipe_id = params.fetch("recipe_id")
 
     if @ingredient.valid?
