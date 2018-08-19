@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @recipe.present? %>
+  <% if @recipe.errors.any? %>
+    <% @recipe.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new recipe
+</h1>
+
+<hr>
+
+<form action="/create_recipe" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @recipe.try(:name) %>">
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @recipe.try(:user_id) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create recipe
+  </button>
+</form>
+
+<hr>
+
+<a href="/recipes">
+  Go back
+</a>

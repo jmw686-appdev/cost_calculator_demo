@@ -1,0 +1,49 @@
+<h1>
+  Recipe #<%= @recipe.id %> details
+</h1>
+
+<a href="/recipes/<%= @recipe.id %>/edit">
+  Edit recipe
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @recipe.name %>
+  </dd>
+
+  <dt>
+    User
+  </dt>
+  <dd>
+    <%= @recipe.user_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@recipe.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@recipe.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_recipe/<%= @recipe.id %>">
+  Delete recipe
+</a>
+
+<hr>
+
+<a href="/recipes">
+  Go back
+</a>
