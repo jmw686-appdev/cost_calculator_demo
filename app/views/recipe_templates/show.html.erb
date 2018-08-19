@@ -27,7 +27,7 @@
          <%= ingr.amount %> - <%= ingr.units %>
          <br>
          <%= link_to "Edit #{ingr.name}", edit_ingredient_path(ingr) %>
-         <%= link_to 'X', delete_ingredient_path(ingr) %>
+         <%= link_to 'X', delete_ingredient_path(ingr), data: {confirm: "Are you sure you want to delete this ingredient?"} %>
          <br>
       </div>
       <hr>

@@ -63,6 +63,7 @@ class IngredientsController < ApplicationController
 
     @ingredient.destroy
 
-    redirect_to("/ingredients", :notice => "Ingredient deleted successfully.")
+    redirect_back fallback_location: recipe_path(@ingredient.recipe_id), notice: "Ingredient created successfully."
+    # redirect_to("/ingredients", :notice => "Ingredient deleted successfully.")
   end
 end

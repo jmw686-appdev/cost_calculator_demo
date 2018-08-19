@@ -42,6 +42,7 @@
   </div>
 
   <!-- Label and input for price -->
+  <% if @ingredient.recipe.shoplist %>
   <div class="form-group">
     <label for="price">
       Price
@@ -49,15 +50,8 @@
 
     <input type="text" id="price" name="price" class="form-control" value="<%= @ingredient.price %>">
   </div>
+  <% end %>
 
-  <!-- Label and input for recipe_id -->
-  <div class="form-group">
-    <label for="recipe_id">
-      Recipe
-    </label>
-
-    <input type="text" id="recipe_id" name="recipe_id" class="form-control" value="<%= @ingredient.recipe_id %>">
-  </div>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
   <button class="btn btn-block btn-outline-secondary">
@@ -67,6 +61,4 @@
 
 <hr>
 
-<a href="/ingredients">
-  Go back
-</a>
+<%= link_to 'Go Back', recipe_path(@ingredient.recipe) %>

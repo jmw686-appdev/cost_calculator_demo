@@ -29,21 +29,14 @@
   <dd>
     <%= @ingredient.units %>
   </dd>
-
-  <dt>
-    Price
-  </dt>
-  <dd>
-    <%= @ingredient.price %>
-  </dd>
-
-  <dt>
-    Recipe
-  </dt>
-  <dd>
-    <%= @ingredient.recipe_id %>
-  </dd>
-
+  <% if @ingredient.recipe.shoplist  %>
+    <dt>
+      Price
+    </dt>
+    <dd>
+      <%= number_to_currency(@ingredient.price)%>
+    </dd>
+  <% end %>
   <dt>
     Created at
   </dt>
