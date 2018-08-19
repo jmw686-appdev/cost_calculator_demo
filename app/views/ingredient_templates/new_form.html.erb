@@ -60,6 +60,7 @@
 
     <input type="text" id="recipe_id" name="recipe_id" class="form-control" value="<%= @ingredient.try(:recipe_id) %>">
   </div>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
   <button class="btn btn-block btn-outline-secondary">
     Create ingredient
