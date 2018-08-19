@@ -1,0 +1,53 @@
+<!-- Validation failure messages -->
+<% if @shoplist.errors.any? %>
+  <% @shoplist.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit shoplist #<%= @shoplist.id %>
+</h1>
+
+<hr>
+
+<form action="/update_shoplist/<%= @shoplist.id %>" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @shoplist.name %>">
+  </div>
+
+  <!-- Label and input for sum -->
+  <div class="form-group">
+    <label for="sum">
+      Sum
+    </label>
+
+    <input type="text" id="sum" name="sum" class="form-control" value="<%= @shoplist.sum %>">
+  </div>
+
+  <!-- Label and input for recipe_id -->
+  <div class="form-group">
+    <label for="recipe_id">
+      Recipe
+    </label>
+
+    <input type="text" id="recipe_id" name="recipe_id" class="form-control" value="<%= @shoplist.recipe_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update shoplist
+  </button>
+</form>
+
+<hr>
+
+<a href="/shoplists">
+  Go back
+</a>

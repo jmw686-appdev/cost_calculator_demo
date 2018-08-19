@@ -1,0 +1,74 @@
+<h1>
+  All shoplists
+</h1>
+
+<a href="/shoplists/new">
+  Add a new shoplist
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Name
+    </th>
+
+    <th>
+      Sum
+    </th>
+
+    <th>
+      Recipe
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @shoplists.each do |shoplist| %>
+  <tr>
+    <td>
+      <%= shoplist.id %>
+    </td>
+
+    <td>
+      <%= shoplist.name %>
+    </td>
+
+    <td>
+      <%= shoplist.sum %>
+    </td>
+
+    <td>
+      <%= shoplist.recipe_id %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(shoplist.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(shoplist.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/shoplists/<%= shoplist.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

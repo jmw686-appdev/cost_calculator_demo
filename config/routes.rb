@@ -1,4 +1,23 @@
 Rails.application.routes.draw do
+  # Routes for the Shoplist resource:
+
+  # CREATE
+  get("/shoplists/new", { :controller => "shoplists", :action => "new_form" })
+  post("/create_shoplist", { :controller => "shoplists", :action => "create_row" })
+
+  # READ
+  get("/shoplists", { :controller => "shoplists", :action => "index" })
+  get("/shoplists/:id_to_display", { :controller => "shoplists", :action => "show" })
+
+  # UPDATE
+  get("/shoplists/:prefill_with_id/edit", { :controller => "shoplists", :action => "edit_form" })
+  post("/update_shoplist/:id_to_modify", { :controller => "shoplists", :action => "update_row" })
+
+  # DELETE
+  get("/delete_shoplist/:id_to_remove", { :controller => "shoplists", :action => "destroy_row" })
+
+  #------------------------------
+
   # Routes for the Recipe resource:
 
   # CREATE

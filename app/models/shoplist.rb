@@ -1,0 +1,2 @@
+class Shoplist < ApplicationRecord
+end

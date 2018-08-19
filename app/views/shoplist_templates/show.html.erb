@@ -1,0 +1,56 @@
+<h1>
+  Shoplist #<%= @shoplist.id %> details
+</h1>
+
+<a href="/shoplists/<%= @shoplist.id %>/edit">
+  Edit shoplist
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @shoplist.name %>
+  </dd>
+
+  <dt>
+    Sum
+  </dt>
+  <dd>
+    <%= @shoplist.sum %>
+  </dd>
+
+  <dt>
+    Recipe
+  </dt>
+  <dd>
+    <%= @shoplist.recipe_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@shoplist.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@shoplist.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_shoplist/<%= @shoplist.id %>">
+  Delete shoplist
+</a>
+
+<hr>
+
+<a href="/shoplists">
+  Go back
+</a>
