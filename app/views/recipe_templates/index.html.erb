@@ -10,9 +10,6 @@
 
 <table class="table">
   <tr>
-    <th>
-      ID
-    </th>
 
     <th>
       Name
@@ -36,16 +33,13 @@
 
   <% @recipes.each do |recipe| %>
   <tr>
-    <td>
-      <%= recipe.id %>
-    </td>
 
     <td>
       <%= recipe.name %>
     </td>
 
     <td>
-      <%= recipe.user_id %>
+      <%= link_to User.find(recipe.user_id).username, user_path(recipe.user_id) %>
     </td>
 
     <td>

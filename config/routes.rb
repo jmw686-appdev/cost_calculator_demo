@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # READ
   get("/shoplists", { :controller => "shoplists", :action => "index" })
-  get("/shoplists/:id_to_display", { :controller => "shoplists", :action => "show" })
+  get("/shoplists/:id_to_display", { :controller => "shoplists", :action => "show", :as => 'shoplist' })
 
   # UPDATE
   get("/shoplists/:prefill_with_id/edit", { :controller => "shoplists", :action => "edit_form" })
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   # READ
   get("/recipes", { :controller => "recipes", :action => "index" })
-  get("/recipes/:id_to_display", { :controller => "recipes", :action => "show" })
+  get("/recipes/:id_to_display", { :controller => "recipes", :action => "show", :as => 'recipe' })
 
   # UPDATE
   get("/recipes/:prefill_with_id/edit", { :controller => "recipes", :action => "edit_form" })
@@ -58,6 +58,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'users/:id', to: 'users#show',as: 'user'
   root to: "recipes#index"
 
 end
