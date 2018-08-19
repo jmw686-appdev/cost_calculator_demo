@@ -27,7 +27,8 @@ class IngredientsController < ApplicationController
     if @ingredient.valid?
       @ingredient.save
 
-      redirect_to("/ingredients", :notice => "Ingredient created successfully.")
+      redirect_back fallback_location: recipe_path(@ingredient.recipe_id), notice: "Ingredient created successfully."
+      # redirect_to("/ingredients", :notice => "Ingredient created successfully.")
     else
       render("ingredient_templates/new_form.html.erb")
     end
