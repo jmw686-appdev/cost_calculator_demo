@@ -1,0 +1,70 @@
+<h1>
+  Ingredient #<%= @ingredient.id %> details
+</h1>
+
+<a href="/ingredients/<%= @ingredient.id %>/edit">
+  Edit ingredient
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @ingredient.name %>
+  </dd>
+
+  <dt>
+    Amount
+  </dt>
+  <dd>
+    <%= @ingredient.amount %>
+  </dd>
+
+  <dt>
+    Units
+  </dt>
+  <dd>
+    <%= @ingredient.units %>
+  </dd>
+
+  <dt>
+    Price
+  </dt>
+  <dd>
+    <%= @ingredient.price %>
+  </dd>
+
+  <dt>
+    Recipe
+  </dt>
+  <dd>
+    <%= @ingredient.recipe_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@ingredient.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@ingredient.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_ingredient/<%= @ingredient.id %>">
+  Delete ingredient
+</a>
+
+<hr>
+
+<a href="/ingredients">
+  Go back
+</a>
