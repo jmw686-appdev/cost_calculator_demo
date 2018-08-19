@@ -15,12 +15,29 @@
   <dd>
     <%= @recipe.name %>
   </dd>
+  <dt>
+    Ingredients
+  </dt>
+  <dd>
+    <% @recipe.ingredients.each do |ingr| %>
+      <div>
 
+         <%= ingr.name %>
+         <br>
+         <%= ingr.amount %> - <%= ingr.units %>
+         <br>
+         <%= link_to "Edit #{ingr.name}", edit_ingredient_path(ingr) %>
+         <%= link_to 'X', delete_ingredient_path(ingr) %>
+         <br>
+      </div>
+      <hr>
+    <% end %>
+  </dd>
   <dt>
     User
   </dt>
   <dd>
-    <%= @recipe.user_id %>
+    <%= link_to @recipe.user.username, user_path(@recipe.user) %>
   </dd>
 
   <dt>

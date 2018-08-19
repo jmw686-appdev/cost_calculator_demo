@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   post("/update_recipe/:id_to_modify", { :controller => "recipes", :action => "update_row" })
 
   # DELETE
-  get("/delete_recipe/:id_to_remove", { :controller => "recipes", :action => "destroy_row" })
+  get("/delete_recipe/:id_to_remove", { :controller => "recipes", :action => "destroy_row", :as => 'delete_recipe' })
 
   #------------------------------
 
@@ -48,11 +48,11 @@ Rails.application.routes.draw do
   get("/ingredients/:id_to_display", { :controller => "ingredients", :action => "show" })
 
   # UPDATE
-  get("/ingredients/:prefill_with_id/edit", { :controller => "ingredients", :action => "edit_form" })
+  get("/ingredients/:prefill_with_id/edit", { :controller => "ingredients", :action => "edit_form", :as => 'edit_ingredient' })
   post("/update_ingredient/:id_to_modify", { :controller => "ingredients", :action => "update_row" })
 
   # DELETE
-  get("/delete_ingredient/:id_to_remove", { :controller => "ingredients", :action => "destroy_row" })
+  get("/delete_ingredient/:id_to_remove", { :controller => "ingredients", :action => "destroy_row", :as => 'delete_ingredient' })
 
   #------------------------------
 

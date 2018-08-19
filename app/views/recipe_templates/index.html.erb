@@ -29,15 +29,15 @@
 
     <th>
     </th>
+    <th>
+    </th>
   </tr>
 
   <% @recipes.each do |recipe| %>
   <tr>
-
     <td>
       <%= recipe.name %>
     </td>
-
     <td>
       <%= link_to User.find(recipe.user_id).username, user_path(recipe.user_id) %>
     </td>
@@ -54,6 +54,9 @@
       <a href="/recipes/<%= recipe.id %>">
         Show details
       </a>
+    </td>
+    <td>
+      <%= link_to 'X', delete_recipe_path(recipe), data: {confirm: "Are you sure?"} %>
     </td>
   </tr>
   <% end %>
