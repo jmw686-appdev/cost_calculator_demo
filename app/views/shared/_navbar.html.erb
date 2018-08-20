@@ -15,9 +15,9 @@
             Resources
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/rails_direct_uploads" class="dropdown-item">
+            <!-- <a href="/rails_direct_uploads" class="dropdown-item">
               Rails Direct Uploads
-            </a>
+            </a> -->
           </div>
         </li>
       </ul>
@@ -25,33 +25,33 @@
         <% if current_user.blank? %>
           <li class="nav-item">
             <a href="/users/sign_in" class="nav-link">
-              
+
               Sign in
-              
+
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/users/sign_up" class="nav-link">
-              
+
               Sign up
-              
+
             </a>
           </li>
         <% else %>
           <li class="nav-item">
             <a href="/users/edit" class="nav-link">
-              
+
               Edit profile
-              
+
             </a>
           </li>
 
           <li class="nav-item">
             <a href="/users/sign_out" data-method="delete" class="nav-link">
-              
+
               Sign out
-              
+
             </a>
           </li>
         <% end %>
