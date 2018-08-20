@@ -91,11 +91,9 @@ class ShoplistsController < ApplicationController
       end
       @running_sum += temp_ingredient_cost
     end
-    
-    # while j < @shoplist.items.size
-    #   j++
-    # end
-
     render 'shared/unit_cost'
   end
+  
+  
+  
 end
