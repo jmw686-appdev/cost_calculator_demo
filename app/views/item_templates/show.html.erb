@@ -1,0 +1,70 @@
+<h1>
+  Item #<%= @item.id %> details
+</h1>
+
+<a href="/items/<%= @item.id %>/edit">
+  Edit item
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Name
+  </dt>
+  <dd>
+    <%= @item.name %>
+  </dd>
+
+  <dt>
+    Amount
+  </dt>
+  <dd>
+    <%= @item.amount %>
+  </dd>
+
+  <dt>
+    Units
+  </dt>
+  <dd>
+    <%= @item.units %>
+  </dd>
+
+  <dt>
+    Price
+  </dt>
+  <dd>
+    <%= @item.price %>
+  </dd>
+
+  <dt>
+    Shoplist
+  </dt>
+  <dd>
+    <%= @item.shoplist_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@item.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@item.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_item/<%= @item.id %>">
+  Delete item
+</a>
+
+<hr>
+
+<a href="/items">
+  Go back
+</a>

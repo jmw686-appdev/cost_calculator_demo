@@ -20,16 +20,25 @@
     Sum
   </dt>
   <dd>
-    <%= @shoplist.sum %>
+    <%= number_to_currency(@shoplist.sum) %>
   </dd>
 
   <dt>
     Recipe
   </dt>
   <dd>
-    <%= @shoplist.recipe_id %>
+    <%= link_to @shoplist.name, recipe_path(@shoplist.recipe_id) %>
   </dd>
-
+  <dt>
+    Ingredients
+  </dt>
+  <% @ingredients.each do |i| %>
+    <dd>
+      <%= link_to i.name, edit_ingredient_path(i) %>
+      | &nbsp; <%= i.amount %> &nbsp; <%= i.units %>
+      | &nbsp; <%= number_to_currency(i.price) %>
+    </dd>
+  <% end %>
   <dt>
     Created at
   </dt>

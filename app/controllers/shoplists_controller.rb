@@ -7,7 +7,7 @@ class ShoplistsController < ApplicationController
 
   def show
     @shoplist = Shoplist.find(params.fetch("id_to_display"))
-
+    @ingredients = Recipe.find_by(name: @shoplist.name).ingredients
     render("shoplist_templates/show.html.erb")
   end
 
@@ -17,15 +17,23 @@ class ShoplistsController < ApplicationController
 
   def create_row
     @shoplist = Shoplist.new
-
-    @shoplist.name = params.fetch("name")
-    @shoplist.sum = params.fetch("sum")
-    @shoplist.recipe_id = params.fetch("recipe_id")
-
+    recipe = Recipe.find(params.fetch('id'))
+    @shoplist.name = recipe.name
+    @shoplist.sum = 0
+    @shoplist.recipe_id = params.fetch("id")
+    ingredients = Ingredient.where(recipe_id: recipe.id)
     if @shoplist.valid?
       @shoplist.save
-
-      redirect_to("/shoplists", :notice => "Shoplist created successfully.")
+      ingredients.each do |i|
+        # ig = Ingredient.new
+        # ig.name = i.name
+        # ig.amount = i.amount
+        # ig.units = i.units
+        # ig.price = i.price
+        i.save
+      end
+      redirect_back fallback_location: shoplist_path(@shoplist), notice: "Shoplist created successfully."
+      # redirect_to("/shoplists", :notice => "Shoplist created successfully.")
     else
       render("shoplist_templates/new_form.html.erb")
     end

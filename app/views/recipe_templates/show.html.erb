@@ -60,7 +60,12 @@
 </a>
 
 <hr>
-
+<% if @recipe.shoplist %>
+  <%= link_to 'Shoplist', shoplist_path(@recipe.shoplist) %>
+<% else %>
+  <%= link_to 'Create Shoplist', create_shoplist_path(@recipe.id), method: 'post' %>
+  <br>
+<% end %>
 <a href="/recipes">
   Go back
 </a>

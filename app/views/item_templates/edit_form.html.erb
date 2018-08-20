@@ -1,0 +1,71 @@
+<!-- Validation failure messages -->
+<% if @item.errors.any? %>
+  <% @item.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit item #<%= @item.id %>
+</h1>
+
+<hr>
+
+<form action="/update_item/<%= @item.id %>" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control" value="<%= @item.name %>">
+  </div>
+
+  <!-- Label and input for amount -->
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control" value="<%= @item.amount %>">
+  </div>
+
+  <!-- Label and input for units -->
+  <div class="form-group">
+    <label for="units">
+      Units
+    </label>
+
+    <input type="text" id="units" name="units" class="form-control" value="<%= @item.units %>">
+  </div>
+
+  <!-- Label and input for price -->
+  <div class="form-group">
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" class="form-control" value="<%= @item.price %>">
+  </div>
+
+  <!-- Label and input for shoplist_id -->
+  <div class="form-group">
+    <label for="shoplist_id">
+      Shoplist
+    </label>
+
+    <input type="text" id="shoplist_id" name="shoplist_id" class="form-control" value="<%= @item.shoplist_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update item
+  </button>
+</form>
+
+<hr>
+
+<a href="/items">
+  Go back
+</a>
