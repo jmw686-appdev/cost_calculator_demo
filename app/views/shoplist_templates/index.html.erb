@@ -53,7 +53,7 @@
     </td>
 
     <td>
-      <%= shoplist.recipe_id %>
+      <%= link_to Recipe.find(shoplist.recipe_id).name, recipe_path(shoplist.recipe_id) %>
     </td>
 
     <td>
