@@ -47,8 +47,20 @@
     <label for="units">
       Units
     </label>
-
-    <input type="text" id="units" name="units" class="form-control">
+    <datalist id="units" class="form-control">
+      <input list="units" name="units">
+      <option value="dash"></option>
+      <option value="pinch"></option>
+      <option value="ts"></option>
+      <option value="tbs"></option>
+      <option value="cup"></option>
+      <option value="pound"></option>
+      <option value="fluid oz"></option>
+      <option value="pint"></option>
+      <option value="quart"></option>
+      <option value="gallon"></option>
+    </datalist>
+    <!--<input type="text" id="units" name="units" class="form-control">-->
   </div>
   <input type="hidden" id="user_id" name="user_id" class="form-control"
          value="<%= current_user.try(:id) %>">
