@@ -41,16 +41,7 @@
     <input type="text" id="units" name="units" class="form-control" value="<%= @ingredient.units %>">
   </div>
 
-  <!-- Label and input for price -->
-  <% if @ingredient.recipe.shoplist %>
-  <div class="form-group">
-    <label for="price">
-      Price
-    </label>
 
-    <input type="text" id="price" name="price" class="form-control" value="<%= @ingredient.price %>">
-  </div>
-  <% end %>
 
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 

@@ -30,6 +30,7 @@ class ShoplistsController < ApplicationController
         item.amount = i.amount
         item.units = i.units
         item.price = 0
+        item.shoplist_id = @shoplist.id
         item.save
       end
       redirect_back fallback_location: shoplist_path(@shoplist), notice: "Shoplist created successfully."
@@ -71,5 +72,30 @@ class ShoplistsController < ApplicationController
     @shoplist.destroy
 
     redirect_to("/shoplists", :notice => "Shoplist deleted successfully.")
+  end
+
+
+  def calc
+    @shoplist = Shoplist.find(params.fetch('id'))
+    @recipe = Recipe.find(@shoplist.recipe_id)
+    temp_ingredient_cost = 0
+    @running_sum = 0
+    j = 0
+    (1..@shoplist.items.size).each do |j|
+      j -= 1
+      ratio = @shoplist.items[j].amount / @recipe.ingredients[j].amount
+      temp_ingredient_cost = @shoplist.items[j].price / ratio
+      @shoplist.items[j].unit_cost = temp_ingredient_cost
+      if @shoplist.valid?
+        @shoplist.save
+      end
+      @running_sum += temp_ingredient_cost
+    end
+    
+    # while j < @shoplist.items.size
+    #   j++
+    # end
+
+    render 'shared/unit_cost'
   end
 end

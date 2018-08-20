@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   # READ
   get("/shoplists", { :controller => "shoplists", :action => "index" })
   get("/shoplists/:id_to_display", { :controller => "shoplists", :action => "show", :as => 'shoplist' })
-
+  get '/shoplist/:id', to: 'shoplists#calc', as: 'calc'
   # UPDATE
   get("/shoplists/:prefill_with_id/edit", { :controller => "shoplists", :action => "edit_form" })
   post("/update_shoplist/:id_to_modify", { :controller => "shoplists", :action => "update_row" })
