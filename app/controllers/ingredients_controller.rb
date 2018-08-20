@@ -45,12 +45,11 @@ class IngredientsController < ApplicationController
     @ingredient.name = params.fetch("name")
     @ingredient.amount = params.fetch("amount")
     @ingredient.units = params.fetch("units")
-    @ingredient.recipe_id = params.fetch("recipe_id")
 
     if @ingredient.valid?
       @ingredient.save
 
-      redirect_to("/ingredients/#{@ingredient.id}", :notice => "Ingredient updated successfully.")
+      redirect_to("/recipes/#{@ingredient.recipe_id}", :notice => "Ingredient updated successfully.")
     else
       render("ingredient_templates/edit_form.html.erb")
     end

@@ -1,6 +1,8 @@
 <h1><%= @user.username %></h1>
 
 <div class="">
+  Recipes:
+  <br>
   <% @user.recipes.each do |recipe| %>
   <div class="">
     <%= link_to recipe.name, recipe_path(recipe) %>
@@ -10,6 +12,8 @@
 
   <% @user.shoplists.each do |shoplist| %>
   <div class="">
+    Shoplists:
+    <br>
     <%= link_to shoplist.name, shoplist_path(shoplist) %>
     &nbsp; |
   </div>

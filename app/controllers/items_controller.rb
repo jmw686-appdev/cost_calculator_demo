@@ -47,9 +47,12 @@ class ItemsController < ApplicationController
     @item.units = params.fetch("units")
     @item.price = params.fetch("price")
     @shoplist = Shoplist.find(@item.shoplist_id)
-    @shoplist.sum += @item.price
+    @shoplist.sum = 0
     if @item.valid?
       @item.save
+      @shoplist.items.each do |i|
+        @shoplist.sum += i.price
+      end
       @shoplist.save
       redirect_to(shoplist_path(@item.shoplist_id), :notice => "Item updated successfully.")
     else
