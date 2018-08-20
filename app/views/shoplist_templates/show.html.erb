@@ -32,9 +32,9 @@
   <dt>
     Ingredients
   </dt>
-  <% @ingredients.each do |i| %>
+  <% @shoplist.items.each do |i| %>
     <dd>
-      <%= link_to i.name, edit_ingredient_path(i) %>
+      <%= link_to i.name, edit_item_path(i) %>
       | &nbsp; <%= i.amount %> &nbsp; <%= i.units %>
       | &nbsp; <%= number_to_currency(i.price) %>
     </dd>

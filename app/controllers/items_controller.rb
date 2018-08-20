@@ -46,12 +46,12 @@ class ItemsController < ApplicationController
     @item.amount = params.fetch("amount")
     @item.units = params.fetch("units")
     @item.price = params.fetch("price")
-    @item.shoplist_id = params.fetch("shoplist_id")
-
+    @shoplist = Shoplist.find(@item.shoplist_id)
+    @shoplist.sum += @item.price
     if @item.valid?
       @item.save
-
-      redirect_to("/items/#{@item.id}", :notice => "Item updated successfully.")
+      @shoplist.save
+      redirect_to(shoplist_path(@item.shoplist_id), :notice => "Item updated successfully.")
     else
       render("item_templates/edit_form.html.erb")
     end

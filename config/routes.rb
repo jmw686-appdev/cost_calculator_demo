@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get("/items/:id_to_display", { :controller => "items", :action => "show" })
 
   # UPDATE
-  get("/items/:prefill_with_id/edit", { :controller => "items", :action => "edit_form" })
+  get("/items/:prefill_with_id/edit", { :controller => "items", :action => "edit_form", :as => 'edit_item' })
   post("/update_item/:id_to_modify", { :controller => "items", :action => "update_row" })
 
   # DELETE
