@@ -1,4 +1,6 @@
 class ShoplistsController < ApplicationController
+  include ShoplistsHelper
+  
   def index
     @shoplists = Shoplist.all
 
@@ -27,7 +29,7 @@ class ShoplistsController < ApplicationController
       ingredients.each do |i|
         item = Item.new
         item.name = i.name
-        item.amount = i.amount
+        item.amount = i.quantity
         item.units = i.units
         item.price = 0
         item.shoplist_id = @shoplist.id
@@ -83,8 +85,16 @@ class ShoplistsController < ApplicationController
     j = 0
     (1..@shoplist.items.size).each do |j|
       j -= 1
-      ratio = @shoplist.items[j].amount / @recipe.ingredients[j].amount
-      temp_ingredient_cost = @shoplist.items[j].price / ratio
+      s = @shoplist.items[j]
+      r = @recipe.ingredients[j]
+      
+      # ratio = @shoplist.items[j].amount / @recipe.ingredients[j].quantity
+      @ratio = s.amount / r.quantity
+      #TODO switch statement to pick what helper to run
+      #use that new ratio to get a item unit cost
+      @con = to_quart(r.quantity, r.units)
+      # temp_ingredient_cost = @shoplist.items[j].price / @ratio
+      temp_ingredient_cost = @shoplist.items[j].price / @con
       @shoplist.items[j].unit_cost = temp_ingredient_cost
       if @shoplist.valid?
         @shoplist.save

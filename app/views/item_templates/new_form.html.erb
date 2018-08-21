@@ -39,8 +39,20 @@
     <label for="units">
       Units
     </label>
-
-    <input type="text" id="units" name="units" class="form-control" value="<%= @item.try(:units) %>">
+    <datalist id="units" class="form-control">
+      <input list="units" name="units">
+      <option value="dash"></option>
+      <option value="pinch"></option>
+      <option value="tsp"></option>
+      <option value="tbsp"></option>
+      <option value="cup"></option>
+      <option value="pound"></option>
+      <option value="fluid oz"></option>
+      <option value="pint"></option>
+      <option value="quart"></option>
+      <option value="gallon"></option>
+    </datalist>
+    <!--<input type="text" id="units" name="units" class="form-control" value="<%= @item.try(:units) %>">-->
   </div>
 
   <!-- Label and input for price -->

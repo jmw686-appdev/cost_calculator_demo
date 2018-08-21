@@ -19,7 +19,7 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.new
 
     @ingredient.name = params.fetch("name")
-    @ingredient.amount = params.fetch("amount")
+    @ingredient.quantity = params.fetch("quantity")
     @ingredient.units = params.fetch("units")
     @ingredient.recipe_id = params.fetch("recipe_id")
 
@@ -43,7 +43,7 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.find(params.fetch("id_to_modify"))
 
     @ingredient.name = params.fetch("name")
-    @ingredient.amount = params.fetch("amount")
+    @ingredient.quantity = params.fetch("quantity")
     @ingredient.units = params.fetch("units")
 
     if @ingredient.valid?

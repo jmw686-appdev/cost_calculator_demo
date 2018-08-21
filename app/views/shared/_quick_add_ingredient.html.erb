@@ -6,8 +6,8 @@
     <%= f.text_field :name, id: :name, class: 'form-control' %>
   </div>
   <div class="form-group">
-    <%= f.label :amount %>
-    <%= f.text_field :amount, id: :amount, class: 'form-control' %>
+    <%= f.label :quantity %>
+    <%= f.text_field :quantity, id: :quantity, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= f.label :units %>
@@ -29,12 +29,12 @@
 
   <!-- Label and input for amount -->
   <div class="form-group">
-    <label for="amount">
-      Amount
+    <label for="quantity">
+      Quantity
     </label>
 
-    <input type="text" id="amount" name="amount" class="form-control"
-          value="<%= @ingredient.try(:amount) %>">
+    <input type="text" id="quantity" name="quantity" class="form-control"
+          value="<%= @ingredient.try(:quantity) %>">
   </div>
 
   <!-- Label and input for units -->

@@ -1,10 +1,11 @@
+require 'unitwise'
 namespace :dev do
-  desc "Hydrate the database with some dummy data to make it easier to develop"
+  desc "Add some dummy data to make it easier to develop"
   task :prime => :environment do
     usernames = ["alice", "bob", "carol"]
 
     users = []
-    units = ['cups', 'oz', 'tbs', 'ts']
+    units = ['cup', 'oz', 'tbsp', 'tsp']
     usernames.each do |username|
       user = User.find_or_initialize_by(email: "#{username}@example.com")
 
@@ -31,11 +32,12 @@ namespace :dev do
 
     puts "There are now #{Recipe.count} recipes in the database."
 
-    Recipe.all.each do |r|
-      3.times do 
+    recipes.each do |r|
+      2.times do 
         i = Ingredient.new
         i.name = Faker::Food.ingredient
-        i.amount = rand(1..5)
+        # i.quantity = Unitwise(1, 'cup')
+        i.quantity = 1 + rand(6)
         i.units = units[rand(0..units.size-1)]
         i.recipe_id = r.id
         i.save
