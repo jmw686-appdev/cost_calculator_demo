@@ -29,7 +29,7 @@ class ShoplistsController < ApplicationController
       ingredients.each do |i|
         item = Item.new
         item.name = i.name
-        item.amount = i.quantity
+        item.amount = Unitwise(i.quantity, i.units)
         item.units = i.units
         item.price = 0
         item.shoplist_id = @shoplist.id
@@ -87,7 +87,6 @@ class ShoplistsController < ApplicationController
       j -= 1
       s = @shoplist.items[j]
       r = @recipe.ingredients[j]
-      @ratios = []
       # ratio = @shoplist.items[j].amount / @recipe.ingredients[j].quantity
       # @ratio = s.amount / r.quantity
       #TODO switch statement to pick what helper to run
@@ -100,36 +99,51 @@ class ShoplistsController < ApplicationController
       #6 add
       case r.units
       when 'pinch'
+        @con = Unitwise(s.amount, s.units).to_pinch
   
       when 'dash'
+        @con = Unitwise(s.amount, s.units).to_dash
   
       when 'tsp'
-        @con = to_tsp(s.amount, s.units)
+        # @con = to_tsp(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_teaspoon
+
   
       when 'tbsp'
-        @con = to_tbsp(s.amount, s.units)
+        # @con = to_tbsp(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_tablespoon
   
       when 'cup'
-        @con = to_cup(s.amount, s.units)
+        # @con = to_cup(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_cup
   
-      when 'fl oz' || 'fluid oz' || 'oz'
-        @con = to_fl_oz(s.amount, s.units)
+      when 'fl oz' || 'fluid oz' || 'oz fl'
+        # @con = to_fl_oz(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_oz_fl
+        
+      when 'oz'
+        # @con = to_fl_oz(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_oz
+        
   
       when 'pint'
-        @con = to_pint(s.amount, s.units)
+        # @con = to_pint(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_pint
   
       when 'quart'
-        @con = to_quart(s.amount, s.units)
+        # @con = to_quart(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_quart
   
       when 'gallon'
-        @con = to_gallon(s.amount, s.units)
+        # @con = to_gallon(s.amount, s.units)
+        @con = Unitwise(s.amount, s.units).to_gallon
       
       end 
       
       @ratio = r.quantity / @con
       r.measurement = @ratio
       # temp_ingredient_cost = @shoplist.items[j].price / @ratio
-      temp_ingredient_cost = @shoplist.items[j].price * @ratio
+      temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
       @shoplist.items[j].unit_cost = temp_ingredient_cost
       if @shoplist.valid?
         @shoplist.save

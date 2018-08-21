@@ -22,7 +22,7 @@ class IngredientsController < ApplicationController
     @ingredient.quantity = params.fetch("quantity")
     @ingredient.units = params.fetch("units")
     @ingredient.recipe_id = params.fetch("recipe_id")
-
+    @ingredient.quantity = Unitwise(@ingredient.quantity, @ingredient.units)
     if @ingredient.valid?
       @ingredient.save
 
@@ -45,6 +45,7 @@ class IngredientsController < ApplicationController
     @ingredient.name = params.fetch("name")
     @ingredient.quantity = params.fetch("quantity")
     @ingredient.units = params.fetch("units")
+    @ingredient.quantity = Unitwise(@ingredient.quantity, @ingredient.units)
 
     if @ingredient.valid?
       @ingredient.save

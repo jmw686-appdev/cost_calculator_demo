@@ -20,8 +20,8 @@ class RecipesController < ApplicationController
     @ingredient = Ingredient.new
 
     @ingredient.name = params.fetch('i-name')
-    @ingredient.quantity = params.fetch('quantity')
     @ingredient.units = params.fetch('units')
+    @ingredient.quantity = Unitwise( params.fetch('quantity'), @ingredient.units)
     @recipe.name = params.fetch("name")
     @recipe.user_id = params.fetch("user_id")
     if @recipe.valid?
