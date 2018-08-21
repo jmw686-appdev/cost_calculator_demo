@@ -87,14 +87,49 @@ class ShoplistsController < ApplicationController
       j -= 1
       s = @shoplist.items[j]
       r = @recipe.ingredients[j]
-      
+      @ratios = []
       # ratio = @shoplist.items[j].amount / @recipe.ingredients[j].quantity
-      @ratio = s.amount / r.quantity
+      # @ratio = s.amount / r.quantity
       #TODO switch statement to pick what helper to run
       #use that new ratio to get a item unit cost
-      @con = to_quart(r.quantity, r.units)
+      #1 create ingredients and item lists
+      #2 get price and full units for items
+      #3 convert units of item to match recipe ingredient units
+      #4 divide ingredient quantity by item amount
+      #5 multiply ratio from #4 by item cost
+      #6 add
+      case r.units
+      when 'pinch'
+  
+      when 'dash'
+  
+      when 'tsp'
+        @con = to_tsp(s.amount, s.units)
+  
+      when 'tbsp'
+        @con = to_tbsp(s.amount, s.units)
+  
+      when 'cup'
+        @con = to_cup(s.amount, s.units)
+  
+      when 'fl oz'
+        @con = to_fl_oz(s.amount, s.units)
+  
+      when 'pint'
+        @con = to_pint(s.amount, s.units)
+  
+      when 'quart'
+        @con = to_quart(s.amount, s.units)
+  
+      when 'gallon'
+        @con = to_gallon(s.amount, s.units)
+      
+      end 
+      
+      @ratio = r.quantity / @con
+      r.measurement = @ratio
       # temp_ingredient_cost = @shoplist.items[j].price / @ratio
-      temp_ingredient_cost = @shoplist.items[j].price / @con
+      temp_ingredient_cost = @shoplist.items[j].price * @ratio
       @shoplist.items[j].unit_cost = temp_ingredient_cost
       if @shoplist.valid?
         @shoplist.save

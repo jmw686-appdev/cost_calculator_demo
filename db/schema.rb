@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 2018_08_21_042758) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "quantity"
+    t.string "measurement"
   end
 
   create_table "items", force: :cascade do |t|

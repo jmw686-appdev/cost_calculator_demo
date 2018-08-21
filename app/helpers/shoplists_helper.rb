@@ -90,22 +90,7 @@ module ShoplistsHelper
       a *= 16
     end
   end  
-  
-  def to_pound(a, b)
-    case b
-    when 'pinch'
-    when 'dash'
-    when 'tsp'
-    when 'tbsp'
-    when 'cup'
-    when 'pound'
-    when 'fl oz'
-    when 'pint'
-    when 'quart'
-    when 'gallon'
-    end
-  end  
-  
+
   def to_fl_oz(a, b)
     case b
     when 'pinch'

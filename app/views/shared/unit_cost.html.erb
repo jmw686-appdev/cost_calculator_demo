@@ -3,9 +3,14 @@
   <%= i.name %> unit cost is <%= number_to_currency(i.unit_cost) %>
   <br>
 <% end %>
+<hr>
+<!--<% @recipe.ingredients.each do |ing| %>-->
+<!--  <%= ing.measurement %>-->
+<!--  <br>-->
+<!--<% end %>-->
+
+
 Recipe Unit Cost: <%= number_to_currency (@running_sum) %> per recipe
 <br>
 <%= link_to 'Back', shoplist_path(@shoplist) %>
 <hr>
-<%= @con %> fl oz
-<%= @ratio %> fl oz
