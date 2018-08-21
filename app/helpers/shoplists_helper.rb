@@ -5,14 +5,14 @@ module ShoplistsHelper
       a
     when 'pinch'
       a *= 2
-    when 'tsp'
+    when 'teaspoon'
       a *= 16
-    when 'tbsp'
+    when 'tablespoon'
       a *= 48
     when 'cup'
       a *= 768 #check this
     when 'pound'
-    when 'fl oz'
+    when 'oz fl'
       a *= 6144
     when 'pint'
       a *= 12288
@@ -24,20 +24,20 @@ module ShoplistsHelper
     end
   end
   
-  #given 'b' units, turn into a amount of tsp
-  def to_tsp(a, b)
+  #given 'b' units, turn into a amount of teaspoon
+  def to_teaspoon(a, b)
     case b
     when 'dash'
       a /= 16
     when 'pinch'
       a /= 8
-    when 'tsp'
+    when 'teaspoon'
       a
-    when 'tbsp'
+    when 'tablespoon'
       a *= 3
     when 'cup'
       a *= 48
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a *= 6
     when 'pint'
       a *= 96
@@ -49,17 +49,17 @@ module ShoplistsHelper
   end  
   
   
-  def to_tbsp(a, b)
+  def to_tablespoon(a, b)
     case b
     when 'pinch'
     when 'dash'
-    when 'tsp'
+    when 'teaspoon'
       a /= 3
-    when 'tbsp'
+    when 'tablespoon'
       a
     when 'cup'
       a *= 16
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a *= 2
     when 'pint'
       a *= 32
@@ -74,13 +74,13 @@ module ShoplistsHelper
     case b
     when 'pinch'
     when 'dash'
-    when 'tsp'
+    when 'teaspoon'
       a /= 48
-    when 'tbsp'
+    when 'tablespoon'
       a /= 16
     when 'cup'
       a 
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a /= 8
     when 'pint'
       a *= 2
@@ -97,13 +97,13 @@ module ShoplistsHelper
       a /= 48
     when 'dash'
       a /= 96
-    when 'tsp'
+    when 'teaspoon'
       a /= 6
-    when 'tbsp'
+    when 'tablespoon'
       a /= 2
     when 'cup'
       a *= 8
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a
     when 'pint'
        a *= 16
@@ -118,14 +118,14 @@ module ShoplistsHelper
     case b
     when 'pinch'
     when 'dash'
-    when 'tsp'
+    when 'teaspoon'
       a /= 96
-    when 'tbsp'
+    when 'tablespoon'
       a /= 32
     when 'cup'
       a /= 2
     when 'pound'
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a /= 16
     when 'pint'
       a
@@ -140,13 +140,13 @@ module ShoplistsHelper
     case b
     when 'pinch'
     when 'dash'
-    when 'tsp'
+    when 'teaspoon'
       a *= 0.005208 
-    when 'tbsp'
+    when 'tablespoon'
       a /= 64
     when 'cup'
       a /= 4
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a /= 32
     when 'pint'
       a /= 2
@@ -161,13 +161,13 @@ module ShoplistsHelper
     case b
     when 'pinch'
     when 'dash'
-    when 'tsp'
+    when 'teaspoon'
       a *= 768
-    when 'tbsp'
+    when 'tablespoon'
       a *= 256
     when 'cup'
       a *= 16
-    when 'fl oz' || 'fluid oz'
+    when 'oz fl' || 'fluid oz'
       a *= 128
     when 'pint'
       a *= 8
@@ -176,5 +176,6 @@ module ShoplistsHelper
     when 'gallon'
       a
     end
-  end
+  end  
+
 end

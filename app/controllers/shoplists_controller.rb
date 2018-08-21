@@ -98,21 +98,18 @@ class ShoplistsController < ApplicationController
       #5 multiply ratio from #4 by item cost
       #6 add
       case r.units
-      when 'pinch'
-        @con = Unitwise(s.amount, s.units).to_pinch
   
-      when 'dash'
-        @con = Unitwise(s.amount, s.units).to_dash
-  
-      when 'tsp'
+      when 'teaspoon'
         # @con = to_tsp(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_teaspoon
 
   
-      when 'tbsp'
-        # @con = to_tbsp(s.amount, s.units)
-        @con = Unitwise(s.amount, s.units).to_tablespoon
-  
+      when 'tablespoon'
+        if s.units == 'pound'
+          @con = to_tbsp(s.amount, s.units)
+        else
+          @con = Unitwise(s.amount, s.units).to_tablespoon
+        end
       when 'cup'
         # @con = to_cup(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_cup
