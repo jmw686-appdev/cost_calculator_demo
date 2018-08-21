@@ -37,7 +37,7 @@ module ShoplistsHelper
       a *= 3
     when 'cup'
       a *= 48
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a *= 6
     when 'pint'
       a *= 96
@@ -59,7 +59,7 @@ module ShoplistsHelper
       a
     when 'cup'
       a *= 16
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a *= 2
     when 'pint'
       a *= 32
@@ -80,7 +80,7 @@ module ShoplistsHelper
       a /= 16
     when 'cup'
       a 
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a /= 8
     when 'pint'
       a *= 2
@@ -103,7 +103,7 @@ module ShoplistsHelper
       a /= 2
     when 'cup'
       a *= 8
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a
     when 'pint'
        a *= 16
@@ -125,7 +125,7 @@ module ShoplistsHelper
     when 'cup'
       a /= 2
     when 'pound'
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a /= 16
     when 'pint'
       a
@@ -146,7 +146,7 @@ module ShoplistsHelper
       a /= 64
     when 'cup'
       a /= 4
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a /= 32
     when 'pint'
       a /= 2
@@ -167,7 +167,7 @@ module ShoplistsHelper
       a *= 256
     when 'cup'
       a *= 16
-    when 'fl oz'
+    when 'fl oz' || 'fluid oz'
       a *= 128
     when 'pint'
       a *= 8

@@ -5,7 +5,7 @@ namespace :dev do
     usernames = ["alice", "bob", "carol"]
 
     users = []
-    units = ['cup', 'oz', 'tbsp', 'tsp']
+    units = ['pint', 'cup', 'fl oz', 'tbsp', 'tsp']
     usernames.each do |username|
       user = User.find_or_initialize_by(email: "#{username}@example.com")
 

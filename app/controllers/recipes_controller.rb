@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
     @ingredient = Ingredient.new
 
     @ingredient.name = params.fetch('i-name')
-    @ingredient.amount = params.fetch('amount')
+    @ingredient.quantity = params.fetch('quantity')
     @ingredient.units = params.fetch('units')
     @recipe.name = params.fetch("name")
     @recipe.user_id = params.fetch("user_id")

@@ -112,7 +112,7 @@ class ShoplistsController < ApplicationController
       when 'cup'
         @con = to_cup(s.amount, s.units)
   
-      when 'fl oz'
+      when 'fl oz' || 'fluid oz' || 'oz'
         @con = to_fl_oz(s.amount, s.units)
   
       when 'pint'
