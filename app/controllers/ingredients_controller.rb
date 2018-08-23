@@ -20,9 +20,23 @@ class IngredientsController < ApplicationController
 
     @ingredient.name = params.fetch("name")
     @ingredient.quantity = params.fetch("quantity")
-    @ingredient.units = params.fetch("units")
+    units = params.fetch("units")
+    case units
+    
+    when 'tsp'
+      units = 'teaspoon'      
+    when 'tbsp'
+      units = 'tablespoon'    
+    when 'lbs'
+      units = 'pound'
+    when 'ounce'
+      units = 'oz'
+    when 'fluid oz'
+      units = 'oz fl'
+    end
+    @ingredient.units = units
     @ingredient.recipe_id = params.fetch("recipe_id")
-    @ingredient.quantity = Unitwise(@ingredient.quantity, @ingredient.units)
+    @ingredient.quantity = @ingredient.quantity
     if @ingredient.valid?
       @ingredient.save
 
@@ -44,8 +58,22 @@ class IngredientsController < ApplicationController
 
     @ingredient.name = params.fetch("name")
     @ingredient.quantity = params.fetch("quantity")
-    @ingredient.units = params.fetch("units")
-    @ingredient.quantity = Unitwise(@ingredient.quantity, @ingredient.units)
+    units = params.fetch("units")
+    case units
+    
+    when 'tsp'
+      units = 'teaspoon'      
+    when 'tbsp'
+      units = 'tablespoon'    
+    when 'lbs'
+      units = 'pound'
+    when 'ounce'
+      units = 'oz'
+    when 'fluid oz'
+      units = 'oz fl'
+    end
+    @ingredient.units = units
+    @ingredient.quantity = @ingredient.quantity
 
     if @ingredient.valid?
       @ingredient.save

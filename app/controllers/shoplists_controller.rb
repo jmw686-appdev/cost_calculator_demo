@@ -97,19 +97,23 @@ class ShoplistsController < ApplicationController
       #4 divide ingredient quantity by item amount
       #5 multiply ratio from #4 by item cost
       #6 add
+      
+      ingredient_unitwise = Unitwise(r.quantity, r.units)
       case r.units
   
       when 'teaspoon'
         # @con = to_tsp(s.amount, s.units)
-        if s.units == 'fluid oz'
-        @con = Unitwise(s.amount, 'oz fl').to_teaspoon
-        
-        else
+        #TODO move out into helper function to call on ALL units before case?
+        if (ingredient_unitwise.compatible_with?(Unitwise(s.amount, s.units)))
           @con = Unitwise(s.amount, s.units).to_teaspoon
-        
+        else 
+          #error
+          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}- 
+                      #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not 
+                      compatible to convert to #{s.name}- #{s.amount} #{s.units}"
+          return
         end
-
-  
+        
       when 'tablespoon'
         if s.units == 'pound'
           @con = to_tbsp(s.amount, s.units)
@@ -141,6 +145,13 @@ class ShoplistsController < ApplicationController
         # @con = to_gallon(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_gallon
       
+      else
+        #TODO custom unit! enter the container
+        if s.units != r.units
+          #error form not valid
+        else
+          #nothing to do since, they're already in the same units
+        end
       end 
       
       @ratio = r.quantity / @con
