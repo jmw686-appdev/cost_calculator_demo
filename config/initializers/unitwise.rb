@@ -23,6 +23,18 @@ Unitwise.register(
   },
   property: 'mass'
 )
+#cubes of bread
+Unitwise.register(
+  names: ["cubes of bread"],
+  symbol: "cbs_b",
+  primary_code: "[cbs_b]",
+  secondary_code: "[CBS_B]",
+  scale: {
+    value: 1,
+	  unit_code: '[cup_us]0.52'
+  },
+  property: 'volume'
+)
 
 #average bread has 20-24 slices, 16-18 if texas toast or sourdough, 26 if thinly
 Unitwise.register(
