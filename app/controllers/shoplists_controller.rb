@@ -98,8 +98,15 @@ class ShoplistsController < ApplicationController
       #4 divide ingredient quantity by item amount
       #5 multiply ratio from #4 by item cost
       #6 add
+      ingredient_unitwise = nil
       if Unitwise.search(r.units).empty?
         custom_unit = true
+        if (s.units != r.units)
+          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}- 
+            #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not 
+            compatible to convert to #{s.name}- #{s.amount} #{s.units}"
+          return
+        end
       end
       if !custom_unit
         ingredient_unitwise = Unitwise(r.quantity, r.units)

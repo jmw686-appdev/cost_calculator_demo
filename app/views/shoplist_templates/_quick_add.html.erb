@@ -1,0 +1,76 @@
+<hr>
+<h4>Add Item</h4>
+<!-- <%= form_with url: create_item_path do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, id: :name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :amount %>
+    <%= f.text_field :amount, id: :amount, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :units %>
+    <%= f.text_field :units, id: :units, class: 'form-control' %>
+  </div>
+  <%= f.hidden_field 'shoplist_id', id: 'shoplist_id', value: @shoplist.id %>
+  <%= f.submit %>
+<% end %> -->
+<form action="/create_item" method="post">
+  <!-- Label and input for name -->
+  <div class="form-group">
+    <label for="name">
+      Name
+    </label>
+
+    <input type="text" id="name" name="name" class="form-control"
+        value="<%= @item.try(:name) %>">
+  </div>
+
+  <!-- Label and input for amount -->
+  <div class="form-group">
+    <label for="amount">
+      Amount
+    </label>
+
+    <input type="text" id="amount" name="amount" class="form-control"
+          value="<%= @item.try(:amount) %>">
+  </div>
+
+  <!-- Label and input for units -->
+  <div class="form-group">
+    <label for="units">
+      Units
+    </label>
+    <datalist id="units" class="form-control">
+      <input list="units" name="units">
+      <option value="teaspoon"></option>
+      <option value="tablespoon"></option>
+      <option value="cup"></option>
+      <option value="oz fl"></option>
+      <option value="pint"></option>
+      <option value="quart"></option>
+      <option value="gallon"></option>
+      <option value="oz"></option>
+      <option value="pound"></option>
+      
+    </datalist>
+    <!--<input type="text" id="units" name="units" class="form-control"-->
+    <!--      value="<%= @item.try(:units) %>">-->
+  </div>
+    <!-- Label and input for amount -->
+  <div class="form-group">
+    <label for="price">
+      Price
+    </label>
+
+    <input type="text" id="price" name="price" class="form-control"
+          value="<%= @item.try(:price) %>">
+  </div>
+  <input type="hidden" id="shoplist_id" name="shoplist_id" class="form-control"
+          value="<%= @shoplist.try(:id) %>">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <button class="btn btn-block btn-outline-secondary">
+    Add Item
+  </button>
+</form>
