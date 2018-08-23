@@ -101,7 +101,13 @@ class ShoplistsController < ApplicationController
   
       when 'teaspoon'
         # @con = to_tsp(s.amount, s.units)
-        @con = Unitwise(s.amount, s.units).to_teaspoon
+        if s.units == 'fluid oz'
+        @con = Unitwise(s.amount, 'oz fl').to_teaspoon
+        
+        else
+          @con = Unitwise(s.amount, s.units).to_teaspoon
+        
+        end
 
   
       when 'tablespoon'
