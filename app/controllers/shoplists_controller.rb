@@ -82,6 +82,7 @@ class ShoplistsController < ApplicationController
     @recipe = Recipe.find(@shoplist.recipe_id)
     temp_ingredient_cost = 0
     @running_sum = 0
+    custom_unit = false
     j = 0
     (1..@shoplist.items.size).each do |j|
       j -= 1
@@ -97,8 +98,14 @@ class ShoplistsController < ApplicationController
       #4 divide ingredient quantity by item amount
       #5 multiply ratio from #4 by item cost
       #6 add
-      
-      ingredient_unitwise = Unitwise(r.quantity, r.units)
+      if Unitwise.search(r.units).empty?
+        custom_unit = true
+      end
+      if !custom_unit
+        ingredient_unitwise = Unitwise(r.quantity, r.units)
+      else
+        
+      end
       case r.units
   
       when 'teaspoon'
@@ -149,15 +156,26 @@ class ShoplistsController < ApplicationController
         #TODO custom unit! enter the container
         if s.units != r.units
           #error form not valid
+          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Somehow, #{r.name}
+          units (#{r.units}) in the recipe do not match units in the shoplist (#{s.units})"
         else
           #nothing to do since, they're already in the same units
+          #maybe price per container?
+          @con = 1
         end
       end 
       
-      @ratio = r.quantity / @con
-      r.measurement = @ratio
       # temp_ingredient_cost = @shoplist.items[j].price / @ratio
-      temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
+      if custom_unit
+        temp_ingredient_cost = @recipe.ingredients[j].quantity /
+                        (@shoplist.items[j].amount) * @shoplist.items[j].price
+        # temp_ingredient_cost = @shoplist.items[j].price * @ratio
+
+      else
+        @ratio = r.quantity / @con
+        r.measurement = @ratio
+        temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
+      end
       @shoplist.items[j].unit_cost = temp_ingredient_cost
       if @shoplist.valid?
         @shoplist.save
