@@ -29,7 +29,7 @@ class ShoplistsController < ApplicationController
       ingredients.each do |i|
         item = Item.new
         item.name = i.name
-        item.amount = Unitwise(i.quantity, i.units)
+        item.amount = i.quantity
         item.units = i.units
         item.price = 0
         item.shoplist_id = @shoplist.id
@@ -120,13 +120,13 @@ class ShoplistsController < ApplicationController
         # @con = to_cup(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_cup
   
-      when 'fl oz' || 'fluid oz' || 'oz fl'
+      when 'oz fl'
         # @con = to_fl_oz(s.amount, s.units)
-        @con = Unitwise(s.amount, s.units).to_oz_fl
+        @con = Unitwise(s.amount, s.units).to_fluid_ounce
         
       when 'oz'
         # @con = to_fl_oz(s.amount, s.units)
-        @con = Unitwise(s.amount, s.units).to_oz
+        @con = Unitwise(s.amount, s.units).to_ounce
         
   
       when 'pint'

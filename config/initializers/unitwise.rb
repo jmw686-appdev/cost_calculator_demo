@@ -5,7 +5,7 @@ Unitwise.register(
   secondary_code: "fng",
   scale: {
     value: 1.0,
-    unit_code: '[foz_us]' #comparable to 1 fluid ounces
+    unit_code: '[foz_us]' #comparable to 1 fluid ounce
     
   },
   property: 'fluid volume'

@@ -20,7 +20,21 @@ class ItemsController < ApplicationController
 
     @item.name = params.fetch("name")
     @item.amount = params.fetch("amount")
-    @item.units = params.fetch("units")
+    units = params.fetch("units")
+    case units
+    
+    when 'tsp'
+      units = 'teaspoon'      
+    when 'tbsp'
+      units = 'tablespoon'    
+    when 'lbs'
+      units = 'pound'
+    when 'ounce'
+      units = 'oz'
+    when 'fluid oz'
+      units = 'oz fl'
+    end
+    @item.units = units
     @item.price = params.fetch("price")
     @item.shoplist_id = params.fetch("shoplist_id")
 
@@ -44,7 +58,23 @@ class ItemsController < ApplicationController
 
     @item.name = params.fetch("name")
     @item.amount = params.fetch("amount")
-    @item.units = params.fetch("units")
+    units = params.fetch("units")
+    case units
+    
+    when ''
+      units = @item.units
+    when 'tsp'
+      units = 'teaspoon' 
+    when 'tbsp'
+      units = 'tablespoon'    
+    when 'lbs'
+      units = 'pound'
+    when 'ounce'
+      units = 'oz'
+    when 'fluid oz'
+      units = 'oz fl'
+    end
+    @item.units = units
     @item.price = params.fetch("price")
     @shoplist = Shoplist.find(@item.shoplist_id)
     @shoplist.sum = 0
