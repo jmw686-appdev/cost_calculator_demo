@@ -158,7 +158,7 @@ class ShoplistsController < ApplicationController
       when 'gallon'
         # @con = to_gallon(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_gallon
-      
+
       else
         #TODO custom unit! enter the container
         if s.units != r.units
@@ -168,7 +168,7 @@ class ShoplistsController < ApplicationController
         else
           #nothing to do since, they're already in the same units
           #maybe price per container?
-          @con = 1
+          @con = Unitwise(1, r.units)
         end
       end 
       
@@ -176,18 +176,18 @@ class ShoplistsController < ApplicationController
       if custom_unit
         temp_ingredient_cost = @recipe.ingredients[j].quantity /
                         (@shoplist.items[j].amount) * @shoplist.items[j].price
-        # temp_ingredient_cost = @shoplist.items[j].price * @ratio
+        temp_ingredient_cost = @shoplist.items[j].price * @ratio
 
       else
         @ratio = r.quantity / @con
         r.measurement = @ratio
-        temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
+        temp_ingredient_cost = @shoplist.items[j].price * @ratio
       end
       @shoplist.items[j].unit_cost = temp_ingredient_cost
+      @running_sum += temp_ingredient_cost
       if @shoplist.valid?
         @shoplist.save
       end
-      @running_sum += temp_ingredient_cost
     end
     render 'shared/unit_cost'
   end
