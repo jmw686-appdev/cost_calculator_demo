@@ -1,10 +1,19 @@
 <h1>
-  Shoplist #<%= @shoplist.id %> details
+  Shoplist #<%= @shoplist.id %> <%= @shoplist.name %> details
 </h1>
-
-<a href="/shoplists/<%= @shoplist.id %>/edit">
-  Edit shoplist
-</a>
+<p>Edit the Ingredient Price and Units to match the containers that containers you purchase for creating the recipe.
+  <br/> 
+  If an ingredient uses volumetric units in the recipe it MUST be in volumetric units in the shoplist. 
+  <hr/> 
+  Example: Recipe requires 2 cup of Flour and the container of Flour you buy in the Shoplist is 3 pound...
+  <br/> 
+  This is invalid and the Flour in the shoplist would need to be in a unit like Fluid Ounce to convert properly.
+  <br/> 
+  Same with units of mass.
+</p>
+<!--<a href="/shoplists/<%= @shoplist.id %>/edit">-->
+<!--  Edit shoplist-->
+<!--</a>-->
 
 <hr>
 <%= link_to 'Calculate Unit Cost', calc_path(@shoplist.id) %>
@@ -41,19 +50,19 @@
       | &nbsp; <%= number_to_currency(i.price) %>
     </dd>
   <% end %>
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@shoplist.created_at) %> ago
-  </dd>
+  <!--<dt>-->
+  <!--  Created at-->
+  <!--</dt>-->
+  <!--<dd>-->
+  <!--  <%= time_ago_in_words(@shoplist.created_at) %> ago-->
+  <!--</dd>-->
 
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@shoplist.updated_at) %> ago
-  </dd>
+  <!--<dt>-->
+  <!--  Updated at-->
+  <!--</dt>-->
+  <!--<dd>-->
+  <!--  <%= time_ago_in_words(@shoplist.updated_at) %> ago-->
+  <!--</dd>-->
 </dl>
 
 <a href="/delete_shoplist/<%= @shoplist.id %>">
@@ -63,6 +72,6 @@
 <hr>
 
 <%= render 'shoplist_templates/quick_add' %>
-<a href="/shoplists">
+<a href="/recipes/<%= @shoplist.recipe_id %>">
   Go back
 </a>

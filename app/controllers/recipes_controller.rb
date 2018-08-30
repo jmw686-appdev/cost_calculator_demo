@@ -42,7 +42,7 @@ class RecipesController < ApplicationController
       @recipe.save
       @ingredient.recipe_id = @recipe.id
       @ingredient.save
-      redirect_to("/recipes", :notice => "Recipe created successfully.")
+      redirect_to("/recipes/#{@recipe.id}", :notice => "Recipe created successfully.")
     else
       render("recipe_templates/new_form.html.erb")
     end

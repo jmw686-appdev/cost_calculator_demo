@@ -36,7 +36,7 @@
   <% @recipes.each do |recipe| %>
   <tr>
     <td>
-      <%= recipe.name %>
+      <%= link_to recipe.name, recipe %>
     </td>
     <td>
       <%= link_to User.find(recipe.user_id).username, user_path(recipe.user_id) %>

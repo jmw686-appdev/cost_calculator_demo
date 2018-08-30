@@ -35,7 +35,7 @@ class ShoplistsController < ApplicationController
         item.shoplist_id = @shoplist.id
         item.save
       end
-      redirect_back fallback_location: shoplist_path(@shoplist), notice: "Shoplist created successfully."
+      redirect_to @shoplist, notice: "Shoplist created successfully."
       # redirect_to("/shoplists", :notice => "Shoplist created successfully.")
     else
       render("shoplist_templates/new_form.html.erb")
@@ -70,10 +70,10 @@ class ShoplistsController < ApplicationController
 
   def destroy_row
     @shoplist = Shoplist.find(params.fetch("id_to_remove"))
-
+    recipe = @shoplist.recipe_id
     @shoplist.destroy
 
-    redirect_to("/shoplists", :notice => "Shoplist deleted successfully.")
+    redirect_to("/recipes/#{recipe}", :notice => "Shoplist deleted successfully.")
   end
 
 

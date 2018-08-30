@@ -1,11 +1,18 @@
 <h1>
-  Recipe #<%= @recipe.id %> details
+  Recipe #<%= @recipe.id %> <%= @recipe.name %> details
 </h1>
-
+<p>Add additional ingredients below, or create a shoplist</p>
+<!-- -->
 <a href="/recipes/<%= @recipe.id %>/edit">
   Edit recipe
 </a>
-
+<br/>
+<% if @recipe.shoplist %>
+  <%= link_to 'Shoplist', shoplist_path(@recipe.shoplist) %>
+<% else %>
+  <%= link_to 'Create Shoplist', create_shoplist_path(@recipe.id), method: 'post' %>
+  <br>
+<% end %>
 <hr>
 
 <dl>
@@ -60,12 +67,7 @@
 </a>
 
 <hr>
-<% if @recipe.shoplist %>
-  <%= link_to 'Shoplist', shoplist_path(@recipe.shoplist) %>
-<% else %>
-  <%= link_to 'Create Shoplist', create_shoplist_path(@recipe.id), method: 'post' %>
-  <br>
-<% end %>
+
 <a href="/recipes">
   Go back
 </a>
