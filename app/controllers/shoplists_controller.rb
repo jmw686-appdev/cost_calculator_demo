@@ -101,6 +101,7 @@ class ShoplistsController < ApplicationController
       ingredient_unitwise = nil
       if Unitwise.search(r.units).empty?
         custom_unit = true
+        #if units are not comparable (volume vs mass)
         if (s.units != r.units)
           redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}- 
             #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not 
@@ -108,7 +109,7 @@ class ShoplistsController < ApplicationController
           return
         end
       end
-      if !custom_unit
+      if custom_unit
         ingredient_unitwise = Unitwise(r.quantity, r.units)
       else
         
@@ -135,28 +136,22 @@ class ShoplistsController < ApplicationController
           @con = Unitwise(s.amount, s.units).to_tablespoon
         end
       when 'cup'
-        # @con = to_cup(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_cup
   
       when 'oz fl'
-        # @con = to_fl_oz(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_fluid_ounce
         
       when 'oz'
-        # @con = to_fl_oz(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_ounce
         
   
       when 'pint'
-        # @con = to_pint(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_pint
   
       when 'quart'
-        # @con = to_quart(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_quart
   
       when 'gallon'
-        # @con = to_gallon(s.amount, s.units)
         @con = Unitwise(s.amount, s.units).to_gallon
 
       else
@@ -181,7 +176,7 @@ class ShoplistsController < ApplicationController
       else
         @ratio = r.quantity / @con
         r.measurement = @ratio
-        temp_ingredient_cost = @shoplist.items[j].price * @ratio
+        temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
       end
       @shoplist.items[j].unit_cost = temp_ingredient_cost
       @running_sum += temp_ingredient_cost
