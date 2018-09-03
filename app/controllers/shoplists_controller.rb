@@ -103,7 +103,7 @@ class ShoplistsController < ApplicationController
         custom_unit = true
         #if units are not comparable (volume vs mass)
         if (s.units != r.units)
-          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}-
+          redirect_to "/shoplists/#{@shoplist.id}", :alert => "Units: #{r.name}-
             #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not
             compatible to convert to #{s.name}- #{s.amount} #{s.units}"
           return
@@ -123,7 +123,7 @@ class ShoplistsController < ApplicationController
           @con = Unitwise(s.amount, s.units).to_teaspoon
         else
           #error
-          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}-
+          redirect_to "/shoplists/#{@shoplist.id}", :alert => "Units: #{r.name}-
                       #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not
                       compatible to convert to #{s.name}- #{s.amount} #{s.units}"
           return
@@ -155,11 +155,11 @@ class ShoplistsController < ApplicationController
         @con = Unitwise(s.amount, s.units).to_gallon
 
       else
-        #TODO custom unit! enter the container
         if s.units != r.units
           #error form not valid
-          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Somehow, #{r.name}
+          redirect_to "/shoplists/#{@shoplist.id}", :alert => "Somehow, #{r.name}
           units (#{r.units}) in the recipe do not match units in the shoplist (#{s.units})"
+          return
         else
           #nothing to do since, they're already in the same units
           #maybe price per container?
