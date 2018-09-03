@@ -171,14 +171,14 @@ class ShoplistsController < ApplicationController
 
       # temp_ingredient_cost = @shoplist.items[j].price / @ratio
       if custom_unit
-        @ratio = r.quantity / 1
-        temp_ingredient_cost = @recipe.ingredients[j].quantity /
-                        (@shoplist.items[j].amount) * @shoplist.items[j].price
-        temp_ingredient_cost = @shoplist.items[j].price * @ratio
+        # @ratio = r.quantity / 1
+        temp_ingredient_cost = r.quantity / @shoplist.items[j].amount * @shoplist.items[j].price
 
       else
+        #@con is shoplist amount
         @ratio = r.quantity / @con
-        r.measurement = @ratio
+        #need to un-migrate this measurement field
+        # r.measurement = @ratio
         temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
       end
       @shoplist.items[j].unit_cost = temp_ingredient_cost
