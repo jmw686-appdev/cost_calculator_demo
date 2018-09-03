@@ -178,6 +178,8 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rollbar (2.17.0)
+      multi_json
     ruby-measurement (1.2.3)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
@@ -256,6 +258,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails_12factor
+  rollbar
   ruby-measurement
   sass-rails (~> 5.0)
   selenium-webdriver
