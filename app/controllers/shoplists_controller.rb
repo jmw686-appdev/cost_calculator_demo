@@ -1,6 +1,6 @@
 class ShoplistsController < ApplicationController
   include ShoplistsHelper
-  
+
   def index
     @shoplists = Shoplist.all
 
@@ -98,13 +98,13 @@ class ShoplistsController < ApplicationController
       #4 divide ingredient quantity by item amount
       #5 multiply ratio from #4 by item cost
       #6 add
-      ingredient_unitwise = nil
+      ingredient_unitwise = Unitwise(r.quantity, r.units)
       if Unitwise.search(r.units).empty?
         custom_unit = true
         #if units are not comparable (volume vs mass)
         if (s.units != r.units)
-          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}- 
-            #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not 
+          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}-
+            #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not
             compatible to convert to #{s.name}- #{s.amount} #{s.units}"
           return
         end
@@ -112,23 +112,23 @@ class ShoplistsController < ApplicationController
       if custom_unit
         ingredient_unitwise = Unitwise(r.quantity, r.units)
       else
-        
+
       end
       case r.units
-  
+
       when 'teaspoon'
         # @con = to_tsp(s.amount, s.units)
         #TODO move out into helper function to call on ALL units before case?
         if (ingredient_unitwise.compatible_with?(Unitwise(s.amount, s.units)))
           @con = Unitwise(s.amount, s.units).to_teaspoon
-        else 
+        else
           #error
-          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}- 
-                      #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not 
+          redirect_to "/shoplists/#{@shoplist.id}", :notice => "Units: #{r.name}-
+                      #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not
                       compatible to convert to #{s.name}- #{s.amount} #{s.units}"
           return
         end
-        
+
       when 'tablespoon'
         if s.units == 'pound'
           @con = to_tbsp(s.amount, s.units)
@@ -137,20 +137,20 @@ class ShoplistsController < ApplicationController
         end
       when 'cup'
         @con = Unitwise(s.amount, s.units).to_cup
-  
+
       when 'oz fl'
         @con = Unitwise(s.amount, s.units).to_fluid_ounce
-        
+
       when 'oz'
         @con = Unitwise(s.amount, s.units).to_ounce
-        
-  
+
+
       when 'pint'
         @con = Unitwise(s.amount, s.units).to_pint
-  
+
       when 'quart'
         @con = Unitwise(s.amount, s.units).to_quart
-  
+
       when 'gallon'
         @con = Unitwise(s.amount, s.units).to_gallon
 
@@ -165,8 +165,8 @@ class ShoplistsController < ApplicationController
           #maybe price per container?
           @con = Unitwise(1, r.units)
         end
-      end 
-      
+      end
+
       # temp_ingredient_cost = @shoplist.items[j].price / @ratio
       if custom_unit
         temp_ingredient_cost = @recipe.ingredients[j].quantity /
@@ -186,7 +186,7 @@ class ShoplistsController < ApplicationController
     end
     render 'shared/unit_cost'
   end
-  
-  
-  
+
+
+
 end
