@@ -98,7 +98,7 @@ class ShoplistsController < ApplicationController
       #4 divide ingredient quantity by item amount
       #5 multiply ratio from #4 by item cost
       #6 add
-      ingredient_unitwise = Unitwise(r.quantity, r.units)
+      ingredient_unitwise = nil
       if Unitwise.search(r.units).empty?
         custom_unit = true
         #if units are not comparable (volume vs mass)
@@ -109,7 +109,7 @@ class ShoplistsController < ApplicationController
           return
         end
       end
-      if custom_unit
+      if !custom_unit
         ingredient_unitwise = Unitwise(r.quantity, r.units)
       else
 
@@ -163,12 +163,15 @@ class ShoplistsController < ApplicationController
         else
           #nothing to do since, they're already in the same units
           #maybe price per container?
-          @con = Unitwise(1, r.units)
+          if !custom_unit
+            @con = Unitwise(1, r.units)
+          end
         end
       end
 
       # temp_ingredient_cost = @shoplist.items[j].price / @ratio
       if custom_unit
+        @ratio = r.quantity / 1
         temp_ingredient_cost = @recipe.ingredients[j].quantity /
                         (@shoplist.items[j].amount) * @shoplist.items[j].price
         temp_ingredient_cost = @shoplist.items[j].price * @ratio

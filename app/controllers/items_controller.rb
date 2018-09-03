@@ -22,11 +22,11 @@ class ItemsController < ApplicationController
     @item.amount = params.fetch("amount")
     units = params.fetch("units")
     case units
-    
+
     when 'tsp'
-      units = 'teaspoon'      
+      units = 'teaspoon'
     when 'tbsp'
-      units = 'tablespoon'    
+      units = 'tablespoon'
     when 'lbs'
       units = 'pound'
     when 'ounce'
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
     if @item.valid?
       @item.save
 
-      redirect_to("/items", :notice => "Item created successfully.")
+      redirect_to("/shoplists/#{@item.shoplist_id}", :notice => "Item created successfully.")
     else
       render("item_templates/new_form.html.erb")
     end
@@ -60,13 +60,13 @@ class ItemsController < ApplicationController
     @item.amount = params.fetch("amount")
     units = params.fetch("units")
     case units
-    
+
     when ''
       units = @item.units
     when 'tsp'
-      units = 'teaspoon' 
+      units = 'teaspoon'
     when 'tbsp'
-      units = 'tablespoon'    
+      units = 'tablespoon'
     when 'lbs'
       units = 'pound'
     when 'ounce'
