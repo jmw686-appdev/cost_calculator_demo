@@ -1,17 +1,11 @@
 class UsersController < ApplicationController
-  def index
-
-  end
+  def index; end
 
   def show
-    @user = User.find(params.fetch('id'))
+    @user = User.find(params.fetch("id"))
   end
 
-  def edit
+  def edit; end
 
-  end
-
-  def destroy
-
-  end
+  def destroy; end
 end

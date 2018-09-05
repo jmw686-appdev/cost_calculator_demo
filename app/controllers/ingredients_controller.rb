@@ -22,17 +22,17 @@ class IngredientsController < ApplicationController
     @ingredient.quantity = params.fetch("quantity")
     units = params.fetch("units")
     case units
-    
-    when 'tsp'
-      units = 'teaspoon'      
-    when 'tbsp'
-      units = 'tablespoon'    
-    when 'lbs'
-      units = 'pound'
-    when 'ounce'
-      units = 'oz'
-    when 'fluid oz'
-      units = 'oz fl'
+
+    when "tsp"
+      units = "teaspoon"
+    when "tbsp"
+      units = "tablespoon"
+    when "lbs"
+      units = "pound"
+    when "ounce"
+      units = "oz"
+    when "fluid oz"
+      units = "oz fl"
     end
     @ingredient.units = units
     @ingredient.recipe_id = params.fetch("recipe_id")
@@ -60,17 +60,17 @@ class IngredientsController < ApplicationController
     @ingredient.quantity = params.fetch("quantity")
     units = params.fetch("units")
     case units
-    
-    when 'tsp'
-      units = 'teaspoon'      
-    when 'tbsp'
-      units = 'tablespoon'    
-    when 'lbs'
-      units = 'pound'
-    when 'ounce'
-      units = 'oz'
-    when 'fluid oz'
-      units = 'oz fl'
+
+    when "tsp"
+      units = "teaspoon"
+    when "tbsp"
+      units = "tablespoon"
+    when "lbs"
+      units = "pound"
+    when "ounce"
+      units = "oz"
+    when "fluid oz"
+      units = "oz fl"
     end
     @ingredient.units = units
     @ingredient.quantity = @ingredient.quantity
@@ -78,7 +78,7 @@ class IngredientsController < ApplicationController
     if @ingredient.valid?
       @ingredient.save
 
-      redirect_to("/recipes/#{@ingredient.recipe_id}", :notice => "Ingredient updated successfully.")
+      redirect_to("/recipes/#{@ingredient.recipe_id}", notice: "Ingredient updated successfully.")
     else
       render("ingredient_templates/edit_form.html.erb")
     end
