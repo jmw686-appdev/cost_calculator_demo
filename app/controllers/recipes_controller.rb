@@ -19,30 +19,30 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @ingredient = Ingredient.new
 
-    @ingredient.name = params.fetch('i-name')
+    @ingredient.name = params.fetch("i-name")
     units = params.fetch("units")
     case units
-    
-    when 'tsp'
-      units = 'teaspoon'      
-    when 'tbsp'
-      units = 'tablespoon'    
-    when 'lbs'
-      units = 'pound'
-    when 'ounce'
-      units = 'oz'
-    when 'fluid oz'
-      units = 'oz fl'
+
+    when "tsp"
+      units = "teaspoon"
+    when "tbsp"
+      units = "tablespoon"
+    when "lbs"
+      units = "pound"
+    when "ounce"
+      units = "oz"
+    when "fluid oz"
+      units = "oz fl"
     end
     @ingredient.units = units
-    @ingredient.quantity = params.fetch('quantity')
+    @ingredient.quantity = params.fetch("quantity")
     @recipe.name = params.fetch("name")
     @recipe.user_id = params.fetch("user_id")
     if @recipe.valid?
       @recipe.save
       @ingredient.recipe_id = @recipe.id
       @ingredient.save
-      redirect_to("/recipes/#{@recipe.id}", :notice => "Recipe created successfully.")
+      redirect_to("/recipes/#{@recipe.id}", notice: "Recipe created successfully.")
     else
       render("recipe_templates/new_form.html.erb")
     end
@@ -63,7 +63,7 @@ class RecipesController < ApplicationController
     if @recipe.valid?
       @recipe.save
 
-      redirect_to("/recipes/#{@recipe.id}", :notice => "Recipe updated successfully.")
+      redirect_to("/recipes/#{@recipe.id}", notice: "Recipe updated successfully.")
     else
       render("recipe_templates/edit_form.html.erb")
     end
@@ -74,6 +74,6 @@ class RecipesController < ApplicationController
 
     @recipe.destroy
 
-    redirect_to("/recipes", :notice => "Recipe deleted successfully.")
+    redirect_to("/recipes", notice: "Recipe deleted successfully.")
   end
 end

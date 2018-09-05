@@ -23,16 +23,16 @@ class ItemsController < ApplicationController
     units = params.fetch("units")
     case units
 
-    when 'tsp'
-      units = 'teaspoon'
-    when 'tbsp'
-      units = 'tablespoon'
-    when 'lbs'
-      units = 'pound'
-    when 'ounce'
-      units = 'oz'
-    when 'fluid oz'
-      units = 'oz fl'
+    when "tsp"
+      units = "teaspoon"
+    when "tbsp"
+      units = "tablespoon"
+    when "lbs"
+      units = "pound"
+    when "ounce"
+      units = "oz"
+    when "fluid oz"
+      units = "oz fl"
     end
     @item.units = units
     @item.price = params.fetch("price")
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
     if @item.valid?
       @item.save
 
-      redirect_to("/shoplists/#{@item.shoplist_id}", :notice => "Item created successfully.")
+      redirect_to("/shoplists/#{@item.shoplist_id}", notice: "Item created successfully.")
     else
       render("item_templates/new_form.html.erb")
     end
@@ -61,18 +61,18 @@ class ItemsController < ApplicationController
     units = params.fetch("units")
     case units
 
-    when ''
+    when ""
       units = @item.units
-    when 'tsp'
-      units = 'teaspoon'
-    when 'tbsp'
-      units = 'tablespoon'
-    when 'lbs'
-      units = 'pound'
-    when 'ounce'
-      units = 'oz'
-    when 'fluid oz'
-      units = 'oz fl'
+    when "tsp"
+      units = "teaspoon"
+    when "tbsp"
+      units = "tablespoon"
+    when "lbs"
+      units = "pound"
+    when "ounce"
+      units = "oz"
+    when "fluid oz"
+      units = "oz fl"
     end
     @item.units = units
     @item.price = params.fetch("price")
@@ -84,7 +84,7 @@ class ItemsController < ApplicationController
         @shoplist.sum += i.price
       end
       @shoplist.save
-      redirect_to(shoplist_path(@item.shoplist_id), :notice => "Item updated successfully.")
+      redirect_to(shoplist_path(@item.shoplist_id), notice: "Item updated successfully.")
     else
       render("item_templates/edit_form.html.erb")
     end
@@ -95,6 +95,6 @@ class ItemsController < ApplicationController
 
     @item.destroy
 
-    redirect_to("/items", :notice => "Item deleted successfully.")
+    redirect_to("/items", notice: "Item deleted successfully.")
   end
 end

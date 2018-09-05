@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: edff2e4898a7222a98e9a9ce81c48d6d88fe26c9
+  revision: 0792a7567d4e8a7debd8d3a37ff02668e8e783b7
   specs:
     faker (1.9.1)
       i18n (>= 0.7)
@@ -67,7 +67,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (10.0.2)
-    capybara (3.6.0)
+    capybara (3.7.0)
       addressable
       mini_mime (>= 0.1.3)
       nokogiri (~> 1.8)
@@ -182,7 +182,7 @@ GEM
       multi_json
     ruby-measurement (1.2.3)
     ruby_dep (1.5.0)
-    rubyzip (1.2.1)
+    rubyzip (1.2.2)
     sass (3.5.7)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -218,9 +218,9 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
-    turbolinks (5.1.1)
-      turbolinks-source (~> 5.1)
-    turbolinks-source (5.1.0)
+    turbolinks (5.2.0)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (4.1.18)
@@ -232,7 +232,7 @@ GEM
       signed_multiset (~> 0.2)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (3.6.2)
+    web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
@@ -280,4 +280,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.2
+   1.16.4

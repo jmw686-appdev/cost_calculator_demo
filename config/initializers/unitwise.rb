@@ -11,7 +11,7 @@
 #   property: 'fluid volume'
 # )
 
-#slice of bread
+# slice of bread
 # Unitwise.register(
 #   names: ["slice", "slices"],
 #   symbol: "slc_of_b",
@@ -19,7 +19,7 @@
 #   secondary_code: "[SLC]",
 #   scale: {
 #     value: 1,
-# 	  unit_code: '[oz_av]0.78'
+#     unit_code: '[oz_av]0.78'
 #   },
 #   property: 'mass'
 # )
@@ -31,12 +31,12 @@
 #   secondary_code: "[CBS_B]",
 #   scale: {
 #     value: 1,
-# 	  unit_code: '[cup_us]0.52'
+#     unit_code: '[cup_us]0.52'
 #   },
 #   property: 'volume'
 # )
 
-#average bread has 20-24 slices, 16-18 if texas toast or sourdough, 26 if thinly
+# average bread has 20-24 slices, 16-18 if texas toast or sourdough, 26 if thinly
 # Unitwise.register(
 #   names: ["loaf", "loaves"],
 #   symbol: "loaf_us",
@@ -44,7 +44,7 @@
 #   secondary_code: "[LF]",
 #   scale: {
 #     value: 1,
-# 	  unit_code: "[slc]22"
+#     unit_code: "[slc]22"
 #   },
 #   property: 'mass'
 # )

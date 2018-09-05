@@ -18,7 +18,7 @@ class ShoplistsController < ApplicationController
 
   def create_row
     @shoplist = Shoplist.new
-    recipe = Recipe.find(params.fetch('id'))
+    recipe = Recipe.find(params.fetch("id"))
     @shoplist.name = recipe.name
     @shoplist.sum = 0
     @shoplist.recipe_id = params.fetch("id")
@@ -62,7 +62,7 @@ class ShoplistsController < ApplicationController
     if @shoplist.valid?
       @shoplist.save
 
-      redirect_to("/shoplists/#{@shoplist.id}", :notice => "Shoplist updated successfully.")
+      redirect_to("/shoplists/#{@shoplist.id}", notice: "Shoplist updated successfully.")
     else
       render("shoplist_templates/edit_form.html.erb")
     end
@@ -73,12 +73,11 @@ class ShoplistsController < ApplicationController
     recipe = @shoplist.recipe_id
     @shoplist.destroy
 
-    redirect_to("/recipes/#{recipe}", :notice => "Shoplist deleted successfully.")
+    redirect_to("/recipes/#{recipe}", notice: "Shoplist deleted successfully.")
   end
 
-
   def calc
-    @shoplist = Shoplist.find(params.fetch('id'))
+    @shoplist = Shoplist.find(params.fetch("id"))
     @recipe = Recipe.find(@shoplist.recipe_id)
     temp_ingredient_cost = 0
     @running_sum = 0
@@ -90,20 +89,20 @@ class ShoplistsController < ApplicationController
       r = @recipe.ingredients[j]
       # ratio = @shoplist.items[j].amount / @recipe.ingredients[j].quantity
       # @ratio = s.amount / r.quantity
-      #TODO switch statement to pick what helper to run
-      #use that new ratio to get a item unit cost
-      #1 create ingredients and item lists
-      #2 get price and full units for items
-      #3 convert units of item to match recipe ingredient units
-      #4 divide ingredient quantity by item amount
-      #5 multiply ratio from #4 by item cost
-      #6 add
+      # TODO switch statement to pick what helper to run
+      # use that new ratio to get a item unit cost
+      # 1 create ingredients and item lists
+      # 2 get price and full units for items
+      # 3 convert units of item to match recipe ingredient units
+      # 4 divide ingredient quantity by item amount
+      # 5 multiply ratio from #4 by item cost
+      # 6 add
       ingredient_unitwise = nil
       if Unitwise.search(r.units).empty?
         custom_unit = true
-        #if units are not comparable (volume vs mass)
-        if (s.units != r.units)
-          redirect_to "/shoplists/#{@shoplist.id}", :alert => "Units: #{r.name}-
+        # if units are not comparable (volume vs mass)
+        if s.units != r.units
+          redirect_to "/shoplists/#{@shoplist.id}", alert: "Units: #{r.name}-
             #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not
             compatible to convert to #{s.name}- #{s.amount} #{s.units}"
           return
@@ -111,58 +110,55 @@ class ShoplistsController < ApplicationController
       end
       if !custom_unit
         ingredient_unitwise = Unitwise(r.quantity, r.units)
-      else
-
       end
       case r.units
 
-      when 'teaspoon'
+      when "teaspoon"
         # @con = to_tsp(s.amount, s.units)
-        #TODO move out into helper function to call on ALL units before case?
-        if (ingredient_unitwise.compatible_with?(Unitwise(s.amount, s.units)))
+        # TODO move out into helper function to call on ALL units before case?
+        if ingredient_unitwise.compatible_with?(Unitwise(s.amount, s.units))
           @con = Unitwise(s.amount, s.units).to_teaspoon
         else
-          #error
-          redirect_to "/shoplists/#{@shoplist.id}", :alert => "Units: #{r.name}-
+          # error
+          redirect_to "/shoplists/#{@shoplist.id}", alert: "Units: #{r.name}-
                       #{r.quantity} #{r.units} in Recipe #{@recipe.name} is not
                       compatible to convert to #{s.name}- #{s.amount} #{s.units}"
           return
         end
 
-      when 'tablespoon'
-        if s.units == 'pound'
-          @con = to_tbsp(s.amount, s.units)
-        else
-          @con = Unitwise(s.amount, s.units).to_tablespoon
-        end
-      when 'cup'
+      when "tablespoon"
+        @con = if s.units == "pound"
+                 to_tbsp(s.amount, s.units)
+               else
+                 Unitwise(s.amount, s.units).to_tablespoon
+               end
+      when "cup"
         @con = Unitwise(s.amount, s.units).to_cup
 
-      when 'oz fl'
+      when "oz fl"
         @con = Unitwise(s.amount, s.units).to_fluid_ounce
 
-      when 'oz'
+      when "oz"
         @con = Unitwise(s.amount, s.units).to_ounce
 
-
-      when 'pint'
+      when "pint"
         @con = Unitwise(s.amount, s.units).to_pint
 
-      when 'quart'
+      when "quart"
         @con = Unitwise(s.amount, s.units).to_quart
 
-      when 'gallon'
+      when "gallon"
         @con = Unitwise(s.amount, s.units).to_gallon
 
       else
         if s.units != r.units
-          #error form not valid
-          redirect_to "/shoplists/#{@shoplist.id}", :alert => "Somehow, #{r.name}
+          # error form not valid
+          redirect_to "/shoplists/#{@shoplist.id}", alert: "Somehow, #{r.name}
           units (#{r.units}) in the recipe do not match units in the shoplist (#{s.units})"
           return
         else
-          #nothing to do since, they're already in the same units
-          #maybe price per container?
+          # nothing to do since, they're already in the same units
+          # maybe price per container?
           if !custom_unit
             @con = Unitwise(1, r.units)
           end
@@ -175,9 +171,9 @@ class ShoplistsController < ApplicationController
         temp_ingredient_cost = r.quantity / @shoplist.items[j].amount * @shoplist.items[j].price
 
       else
-        #@con is shoplist amount
+        # @con is shoplist amount
         @ratio = r.quantity / @con
-        #need to un-migrate this measurement field
+        # need to un-migrate this measurement field
         # r.measurement = @ratio
         temp_ingredient_cost = @shoplist.items[j].price * @ratio.value
       end
@@ -187,9 +183,6 @@ class ShoplistsController < ApplicationController
         @shoplist.save
       end
     end
-    render 'shared/unit_cost'
+    render "shared/unit_cost"
   end
-
-
-
 end
