@@ -17,11 +17,22 @@ class ShoplistsController < ApplicationController
   end
 
   def create_row
-    @shoplist = Shoplist.new
+    # TODO: As part of the refactoring to make things more RESTful, I would
+    #   probably move the recipe id to a parameter called `recipe_id` rather than just `id`
+
     recipe = Recipe.find(params.fetch("id"))
+
+    # And then you can
+
+    @shoplist = recipe.shoplist.build
+
+    # rather than
+
+    # @shoplist = Shoplist.new
+    # @shoplist.recipe_id = params.fetch("id")
+
     @shoplist.name = recipe.name
     @shoplist.sum = 0
-    @shoplist.recipe_id = params.fetch("id")
     # ingredients = Ingredient.where(recipe_id: recipe.id)
     ingredients = recipe.ingredients
     if @shoplist.valid?
@@ -58,6 +69,11 @@ class ShoplistsController < ApplicationController
     @shoplist.items.each do |i|
       sum += i.price
     end
+
+    # sum = @shoplist.items.sum(:price)
+
+
+
     @shoplist.sum = sum
     if @shoplist.valid?
       @shoplist.save

@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get("/shoplists/new", controller: "shoplists", action: "new_form")
   post("/create_shoplist/:id", controller: "shoplists", action: "create_row", as: "create_shoplist")
 
+  post("/shoplists")
+
   # READ
   get("/shoplists", controller: "shoplists", action: "index")
   get("/shoplists/:id_to_display", controller: "shoplists", action: "show", as: "shoplist")
